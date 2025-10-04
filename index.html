@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Mr. Kavishna Munasingha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #ff4081;
+            --secondary: #536dfe;
+            --accent: #4caf50;
+            --text: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            overflow-x: hidden;
+            color: var(--text);
+            background: #0f172a;
+        }
+
+        .container {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            z-index: -1;
+        }
+
+        .content {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .message {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .celebrate-btn {
+            padding: 15px 40px;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .celebrate-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow);
+        }
+
+        .celebrate-btn:active {
+            transform: translateY(0);
+        }
+
+        .celebrate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .celebrate-btn:hover::before {
+            left: 100%;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            animation: floatUp 15s linear forwards;
+            z-index: 0;
+        }
+
+        .balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            animation: confettiFall 5s linear forwards;
+            z-index: 0;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            animation: sparkleTwinkle 3s infinite;
+            z-index: 0;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            opacity: 0.7;
+            animation: floatAround 20s infinite linear;
+            z-index: 0;
+        }
+
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .audio-control:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.1);
+        }
+
+        .birthday-info {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .video-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460, #533483);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sparkleTwinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(100px, 50px) rotate(90deg);
+            }
+
+            50% {
+                transform: translate(50px, 100px) rotate(180deg);
+            }
+
+            75% {
+                transform: translate(-50px, 50px) rotate(270deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .content {
+                padding: 20px;
+                margin: 10px 0;
+            }
+
+            .title {
+                margin-bottom: 15px;
+            }
+
+            .message {
+                margin-bottom: 25px;
+            }
+
+            .celebrate-btn {
+                padding: 12px 30px;
+            }
+
+            .audio-control {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px;
+            }
+
+            .balloon {
+                width: 30px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .celebrate-btn {
+                padding: 10px 25px;
+            }
+
+            .audio-control {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px;
+            }
+
+            .balloon {
+                width: 25px;
+                height: 35px;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) {
+            .celebrate-btn:hover {
+                transform: none;
+            }
+
+            .celebrate-btn:active {
+                transform: scale(0.98);
+            }
+
+            .audio-control:hover {
+                transform: none;
+            }
+
+            .audio-control:active {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="video-container">
+            <!-- Video background -->
+            <video id="bgVideo" autoplay muted loop playsinline>
+                <source src="assets/birthday-video.mp4" type="video/mp4">
+                <!-- Fallback message if video doesn't load -->
+                Your browser does not support the video tag.
+            </video>
+            <!-- Fallback background in case video doesn't load -->
+            <div class="video-fallback" id="videoFallback"></div>
+        </div>
+        <div class="overlay"></div>
+
+        <div class="content">
+            <h1 class="title">🎂 Happy 26th Birthday, Sir Kavishna! 🎂</h1>
+            <p class="message">Wishing you endless happiness, success, and inspiration in everything you do! — From your
+                loving students 💙</p>
+            <button class="celebrate-btn" id="celebrateBtn">
+                <i class="fas fa-birthday-cake"></i> Click to Celebrate 🎈
+            </button>
+            <p class="birthday-info">Born on October 1st • Celebrating on October 5th</p>
+        </div>
+
+        <div class="audio-control" id="audioControl">
+            <i class="fas fa-volume-mute"></i>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const celebrateBtn = document.getElementById('celebrateBtn');
+            const audioControl = document.getElementById('audioControl');
+            const bgVideo = document.getElementById('bgVideo');
+            const videoFallback = document.getElementById('videoFallback');
+            const body = document.body;
+            let audioStarted = false;
+            let audio = null;
+
+            // Check if video can play and handle errors
+            bgVideo.addEventListener('error', function () {
+                console.error('Video failed to load, using fallback background');
+                videoFallback.style.display = 'block';
+            });
+
+            bgVideo.addEventListener('canplay', function () {
+                console.log('Video can play, hiding fallback');
+                videoFallback.style.display = 'none';
+            });
+
+            // Try to play video (some browsers require this)
+            bgVideo.play().catch(function (error) {
+                console.log('Video autoplay failed:', error);
+                videoFallback.style.display = 'block';
+            });
+
+            // Create floating decorative icons
+            const icons = ['★', '❤', '✦', '❉', '✧', '♡', '🎮', '💻', '📱', '🔌'];
+            for (let i = 0; i < 15; i++) {
+                const icon = document.createElement('div');
+                icon.className = 'floating-icon';
+                icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+                icon.style.left = `${Math.random() * 100}%`;
+                icon.style.top = `${Math.random() * 100}%`;
+                icon.style.animationDelay = `${Math.random() * 5}s`;
+                icon.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                body.appendChild(icon);
+            }
+
+            // Create sparkles
+            for (let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 3}s`;
+                sparkle.style.width = `${Math.random() * 4 + 2}px`;
+                sparkle.style.height = sparkle.style.width;
+                body.appendChild(sparkle);
+            }
+
+            // Celebrate button functionality
+            celebrateBtn.addEventListener('click', function () {
+                // Start background music if not already started
+                if (!audioStarted) {
+                    audio = new Audio();
+                    // Using a placeholder audio source - in a real implementation, you would use your own file
+                    audio.src = 'https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3';
+                    audio.loop = true;
+                    audio.volume = 0.3;
+
+                    // Play audio after user interaction
+                    audio.play().then(() => {
+                        audioStarted = true;
+                        audioControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    }).catch(e => {
+                        console.log('Audio play failed:', e);
+                    });
+                }
+
+                // Create balloons
+                for (let i = 0; i < 15; i++) {
+                    createBalloon();
+                }
+
+                // Create confetti
+                for (let i = 0; i < 80; i++) {
+                    createConfetti();
+                }
+
+                // Add extra sparkles
+                for (let i = 0; i < 20; i++) {
+                    createSparkle();
+                }
+
+                // Button animation
+                celebrateBtn.style.animation = 'pulse 0.5s ease';
+                setTimeout(() => {
+                    celebrateBtn.style.animation = '';
+                }, 500);
+            });
+
+            // Audio control functionality
+            audioControl.addEventListener('click', function () {
+                if (audio) {
+                    if (audio.paused) {
+                        audio.play();
+                        audioControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    } else {
+                        audio.pause();
+                        audioControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    }
+                }
+            });
+
+            // Helper functions for creating celebration elements
+            function createBalloon() {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+
+                // Random position
+                balloon.style.left = `${Math.random() * 100}%`;
+
+                // Random color
+                const colors = ['#ff4081', '#536dfe', '#4caf50', '#ff9800', '#9c27b0', '#00bcd4'];
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+                // Random size
+                const size = Math.random() * 20 + 30;
+                balloon.style.width = `${size}px`;
+                balloon.style.height = `${size * 1.25}px`;
+
+                // Random animation duration
+                balloon.style.animationDuration = `${Math.random() * 10 + 10}s`;
+
+                body.appendChild(balloon);
+
+                // Remove balloon after animation completes
+                setTimeout(() => {
+                    balloon.remove();
+                }, 15000);
+            }
+
+            function createConfetti() {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+
+                // Random position
+                confetti.style.left = `${Math.random() * 100}%`;
+
+                // Random color
+                const colors = ['#ff4081', '#536dfe', '#4caf50', '#ff9800', '#9c27b0', '#00bcd4'];
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+                // Random size
+                const size = Math.random() * 10 + 5;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+
+                // Random animation duration
+                confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+
+                body.appendChild(confetti);
+
+                // Remove confetti after animation completes
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+
+            function createSparkle() {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+
+                // Random position
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+
+                // Random size
+                const size = Math.random() * 4 + 2;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+
+                body.appendChild(sparkle);
+
+                // Remove sparkle after animation completes
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 3000);
+            }
+
+            // Add parallax effect to video background on mouse move
+            document.addEventListener('mousemove', function (e) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+
+                bgVideo.style.transform = `translate(${x * 10 - 5}px, ${y * 10 - 5}px)`;
+            });
+
+            // Add touch parallax effect for mobile
+            document.addEventListener('touchmove', function (e) {
+                if (e.touches.length > 0) {
+                    const x = e.touches[0].clientX / window.innerWidth;
+                    const y = e.touches[0].clientY / window.innerHeight;
+
+                    bgVideo.style.transform = `translate(${x * 10 - 5}px, ${y * 10 - 5}px)`;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
