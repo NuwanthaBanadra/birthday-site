@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday Mr. Kavishna Munasingha</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -22,10 +22,17 @@
             --shadow: rgba(0, 0, 0, 0.3);
         }
 
-        body {
+        html, body {
             overflow-x: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
             color: var(--text);
             background: #0f172a;
+            position: relative;
+            -webkit-text-size-adjust: 100%;
         }
 
         .container {
@@ -35,8 +42,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             overflow: hidden;
+            width: 100%;
         }
 
         .video-container {
@@ -69,65 +77,69 @@
             text-align: center;
             max-width: 800px;
             width: 100%;
-            padding: 30px;
+            padding: 20px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            margin: 20px 0;
+            margin: 10px 0;
             position: relative;
             z-index: 2;
         }
 
         .title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
             position: relative;
             animation: fadeInUp 1s ease-out;
+            line-height: 1.2;
+            word-wrap: break-word;
         }
 
         .title::after {
             content: '';
             display: block;
-            width: 100px;
-            height: 4px;
+            width: 80px;
+            height: 3px;
             background: linear-gradient(to right, var(--primary), var(--secondary));
-            margin: 15px auto;
+            margin: 12px auto;
             border-radius: 2px;
         }
 
         .message {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            line-height: 1.6;
-            margin-bottom: 30px;
+            font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+            line-height: 1.5;
+            margin-bottom: 25px;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
             animation: fadeInUp 1s ease-out 0.3s both;
+            word-wrap: break-word;
         }
 
         .celebrate-btn {
-            padding: 15px 40px;
-            font-size: clamp(1rem, 3vw, 1.3rem);
+            padding: 14px 30px;
+            font-size: clamp(0.9rem, 3.5vw, 1.2rem);
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             border: none;
             border-radius: 50px;
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px var(--shadow);
+            box-shadow: 0 4px 10px var(--shadow);
             position: relative;
             overflow: hidden;
             z-index: 1;
             animation: fadeInUp 1s ease-out 0.6s both;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            min-height: 44px; /* Minimum touch target size */
         }
 
         .celebrate-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px var(--shadow);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px var(--shadow);
         }
 
         .celebrate-btn:active {
@@ -153,8 +165,8 @@
         .balloon {
             position: absolute;
             bottom: -100px;
-            width: 40px;
-            height: 50px;
+            width: 30px;
+            height: 38px;
             border-radius: 50%;
             animation: floatUp 15s linear forwards;
             z-index: 0;
@@ -163,18 +175,18 @@
         .balloon::before {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
             width: 2px;
-            height: 15px;
+            height: 12px;
             background: rgba(255, 255, 255, 0.7);
         }
 
         .confetti {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             opacity: 0;
             animation: confettiFall 5s linear forwards;
             z-index: 0;
@@ -182,11 +194,11 @@
 
         .sparkle {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 3px;
+            height: 3px;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.8);
             opacity: 0;
             animation: sparkleTwinkle 3s infinite;
             z-index: 0;
@@ -194,7 +206,7 @@
 
         .floating-icon {
             position: absolute;
-            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-size: clamp(0.9rem, 3vw, 1.3rem);
             opacity: 0.7;
             animation: floatAround 20s infinite linear;
             z-index: 0;
@@ -202,8 +214,8 @@
 
         .audio-control {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             background: rgba(0, 0, 0, 0.5);
             padding: 12px;
             border-radius: 50%;
@@ -213,16 +225,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 44px; /* Minimum touch target size */
+            height: 44px; /* Minimum touch target size */
         }
 
         .audio-control:hover {
             background: rgba(0, 0, 0, 0.7);
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .birthday-info {
-            margin-top: 20px;
-            font-size: 0.9rem;
+            margin-top: 15px;
+            font-size: 0.85rem;
             opacity: 0.8;
             animation: fadeInUp 1s ease-out 0.9s both;
         }
@@ -243,7 +257,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
 
             to {
@@ -261,7 +275,7 @@
 
         @keyframes confettiFall {
             0% {
-                transform: translateY(-100px) rotate(0deg);
+                transform: translateY(-80px) rotate(0deg);
                 opacity: 1;
             }
 
@@ -289,15 +303,15 @@
             }
 
             25% {
-                transform: translate(100px, 50px) rotate(90deg);
+                transform: translate(60px, 30px) rotate(90deg);
             }
 
             50% {
-                transform: translate(50px, 100px) rotate(180deg);
+                transform: translate(30px, 60px) rotate(180deg);
             }
 
             75% {
-                transform: translate(-50px, 50px) rotate(270deg);
+                transform: translate(-30px, 30px) rotate(270deg);
             }
 
             100% {
@@ -327,48 +341,54 @@
             }
 
             50% {
-                transform: scale(1.05);
+                transform: scale(1.03);
             }
         }
 
-        /* Mobile-specific styles */
+        /* Mobile-specific optimizations */
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 10px;
             }
 
             .content {
-                padding: 20px;
-                margin: 10px 0;
+                padding: 18px;
+                margin: 8px 0;
+                border-radius: 12px;
             }
 
             .title {
-                margin-bottom: 15px;
+                margin-bottom: 12px;
             }
 
             .message {
-                margin-bottom: 25px;
+                margin-bottom: 20px;
             }
 
             .celebrate-btn {
-                padding: 12px 30px;
+                padding: 12px 25px;
             }
 
             .audio-control {
-                bottom: 15px;
-                right: 15px;
+                bottom: 12px;
+                right: 12px;
                 padding: 10px;
             }
 
             .balloon {
-                width: 30px;
-                height: 40px;
+                width: 25px;
+                height: 32px;
+            }
+            
+            /* Reduce decorative elements on mobile for performance */
+            .floating-icon {
+                display: none;
             }
         }
 
         @media (max-width: 480px) {
             .container {
-                padding: 10px;
+                padding: 8px;
             }
 
             .content {
@@ -376,7 +396,8 @@
             }
 
             .celebrate-btn {
-                padding: 10px 25px;
+                padding: 10px 20px;
+                min-height: 44px; /* Ensure touch target size */
             }
 
             .audio-control {
@@ -386,8 +407,13 @@
             }
 
             .balloon {
-                width: 25px;
-                height: 35px;
+                width: 22px;
+                height: 28px;
+            }
+            
+            /* Further reduce decorative elements on very small screens */
+            .sparkle {
+                display: none;
             }
         }
 
@@ -398,7 +424,7 @@
             }
 
             .celebrate-btn:active {
-                transform: scale(0.98);
+                transform: scale(0.97);
             }
 
             .audio-control:hover {
@@ -407,6 +433,28 @@
 
             .audio-control:active {
                 transform: scale(0.95);
+            }
+            
+            /* Disable parallax on touch devices for performance */
+            .video-container video {
+                transform: none !important;
+            }
+        }
+        
+        /* Prevent text selection on interactive elements */
+        .celebrate-btn, .audio-control {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        /* Optimize animations for mobile */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -450,6 +498,9 @@
             const body = document.body;
             let audioStarted = false;
             let audio = null;
+            
+            // Check if we're on a mobile device
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
             // Check if video can play and handle errors
             bgVideo.addEventListener('error', function () {
@@ -468,9 +519,10 @@
                 videoFallback.style.display = 'block';
             });
 
-            // Create floating decorative icons
+            // Create floating decorative icons (fewer on mobile)
+            const iconCount = isMobile ? 8 : 15;
             const icons = ['★', '❤', '✦', '❉', '✧', '♡', '🎮', '💻', '📱', '🔌'];
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < iconCount; i++) {
                 const icon = document.createElement('div');
                 icon.className = 'floating-icon';
                 icon.textContent = icons[Math.floor(Math.random() * icons.length)];
@@ -481,14 +533,15 @@
                 body.appendChild(icon);
             }
 
-            // Create sparkles
-            for (let i = 0; i < 50; i++) {
+            // Create sparkles (fewer on mobile)
+            const sparkleCount = isMobile ? 20 : 50;
+            for (let i = 0; i < sparkleCount; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
                 sparkle.style.left = `${Math.random() * 100}%`;
                 sparkle.style.top = `${Math.random() * 100}%`;
                 sparkle.style.animationDelay = `${Math.random() * 3}s`;
-                sparkle.style.width = `${Math.random() * 4 + 2}px`;
+                sparkle.style.width = `${Math.random() * 3 + 2}px`;
                 sparkle.style.height = sparkle.style.width;
                 body.appendChild(sparkle);
             }
@@ -512,18 +565,21 @@
                     });
                 }
 
-                // Create balloons
-                for (let i = 0; i < 15; i++) {
+                // Create balloons (fewer on mobile)
+                const balloonCount = isMobile ? 10 : 15;
+                for (let i = 0; i < balloonCount; i++) {
                     createBalloon();
                 }
 
-                // Create confetti
-                for (let i = 0; i < 80; i++) {
+                // Create confetti (fewer on mobile)
+                const confettiCount = isMobile ? 50 : 80;
+                for (let i = 0; i < confettiCount; i++) {
                     createConfetti();
                 }
 
-                // Add extra sparkles
-                for (let i = 0; i < 20; i++) {
+                // Add extra sparkles (fewer on mobile)
+                const extraSparkleCount = isMobile ? 10 : 20;
+                for (let i = 0; i < extraSparkleCount; i++) {
                     createSparkle();
                 }
 
@@ -560,7 +616,7 @@
                 balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
                 // Random size
-                const size = Math.random() * 20 + 30;
+                const size = Math.random() * 15 + 25;
                 balloon.style.width = `${size}px`;
                 balloon.style.height = `${size * 1.25}px`;
 
@@ -587,7 +643,7 @@
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
                 // Random size
-                const size = Math.random() * 10 + 5;
+                const size = Math.random() * 8 + 4;
                 confetti.style.width = `${size}px`;
                 confetti.style.height = `${size}px`;
 
@@ -611,7 +667,7 @@
                 sparkle.style.top = `${Math.random() * 100}%`;
 
                 // Random size
-                const size = Math.random() * 4 + 2;
+                const size = Math.random() * 3 + 2;
                 sparkle.style.width = `${size}px`;
                 sparkle.style.height = `${size}px`;
 
@@ -623,23 +679,25 @@
                 }, 3000);
             }
 
-            // Add parallax effect to video background on mouse move
-            document.addEventListener('mousemove', function (e) {
-                const x = e.clientX / window.innerWidth;
-                const y = e.clientY / window.innerHeight;
-
-                bgVideo.style.transform = `translate(${x * 10 - 5}px, ${y * 10 - 5}px)`;
-            });
-
-            // Add touch parallax effect for mobile
-            document.addEventListener('touchmove', function (e) {
-                if (e.touches.length > 0) {
-                    const x = e.touches[0].clientX / window.innerWidth;
-                    const y = e.touches[0].clientY / window.innerHeight;
+            // Add parallax effect to video background on mouse move (only on desktop)
+            if (!isMobile) {
+                document.addEventListener('mousemove', function (e) {
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
 
                     bgVideo.style.transform = `translate(${x * 10 - 5}px, ${y * 10 - 5}px)`;
-                }
-            });
+                });
+            }
+
+            // Add touch parallax effect for mobile (disabled for performance)
+            // document.addEventListener('touchmove', function (e) {
+            //     if (e.touches.length > 0) {
+            //         const x = e.touches[0].clientX / window.innerWidth;
+            //         const y = e.touches[0].clientY / window.innerHeight;
+
+            //         bgVideo.style.transform = `translate(${x * 10 - 5}px, ${y * 10 - 5}px)`;
+            //     }
+            // });
         });
     </script>
 </body>
